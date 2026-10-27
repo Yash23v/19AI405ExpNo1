@@ -1,7 +1,6 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: Saravanan N</h3>
-<h3>Register Number/Staff Id: TSML006</h3>
-
+<h3>Name: Yash Chhajer V</h3>
+<h3>Register Number: 212225040498</h3>
 
 <h3>AIM:</h3>
 <br>
@@ -38,5 +37,70 @@
 <p>PEAS description is developed by the performance, environment, actuators, and sensors in an agent.</p>
 <h3>STEP 4:Implementing the AI agent:</h3>
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
-<h3>STEP 5:</h3>
-<p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
+<h3>STEP 5:Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</h3>
+
+<h2>Program:</h2>
+
+```
+
+import random
+
+class MedicineAgent:
+    def __init__(self):
+        self.location = "Room A"
+        self.performance = 0
+
+    def act(self, environment):
+        temp = environment[self.location]["temperature"]
+
+        if temp > 98.5:
+            print(
+                f"Patient in {self.location} unhealthy "
+                f"({temp:.1f}°F). Giving medicine."
+            )
+            self.performance += 10
+            environment[self.location]["temperature"] = 98.0
+        else:
+            print(
+                f"Patient in {self.location} healthy "
+                f"({temp:.1f}°F)."
+            )
+
+        self.location = (
+            "Room B" if self.location == "Room A" else "Room A"
+        )
+
+        self.performance -= 1
+        print(f"Moving to {self.location}. Performance: {self.performance}")
+        print("-" * 30)
+
+
+def main():
+    environment = {
+        "Room A": {"temperature": random.uniform(97.0, 102.0)},
+        "Room B": {"temperature": random.uniform(97.0, 102.0)}
+    }
+
+    agent = MedicineAgent()
+
+    print("Starting simulation.")
+    print("-" * 30)
+
+    for step in range(5):
+        print(f"--- Step {step + 1} ---")
+        agent.act(environment)
+
+        random_room = random.choice(["Room A", "Room B"])
+        environment[random_room]["temperature"] = random.uniform(99.0, 103.0)
+
+    print("Simulation finished.")
+
+
+if __name__ == "__main__":
+    main()
+```
+<h3>Output:</h3>
+<img width="1768" height="422" alt="image" src="https://github.com/user-attachments/assets/fad28290-ae58-4236-8d8c-ea4c27f7b292" />
+
+<h3>Result:</h3>
+<p>Thus the Developing AI Agent with PEAS Description was implemented using python programming.</p>
